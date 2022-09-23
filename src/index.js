@@ -58,7 +58,7 @@ function createImg(images) {
     // подія, при якій створюються картинки
 form.addEventListener("submit", photoName => {
     photoName.preventDefault();
-    a = input.value
+    const a = input.value
     
     getPhoto(a)
         .then(res => {
@@ -76,7 +76,7 @@ form.addEventListener("submit", photoName => {
 //подія при якій додаються наступні картинки
 loadMoreBtn.addEventListener("click", photoName => {
     photoName.preventDefault()
-    
+    const a = input.value
     getPhoto(a)
         .then(res => {
             if (res.data.hits == res.data.totalHits) {
