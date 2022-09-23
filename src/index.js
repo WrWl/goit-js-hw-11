@@ -1,9 +1,11 @@
-import Notiflix from 'notiflix';
+import Notiflix, { Notify } from 'notiflix';
 import axios from "axios";
 const form = document.querySelector('.search-form')
 const input = document.querySelector(".input")
-const submBtn = document.querySelector(".subm-btn")
+const loadMoreBtn = document.querySelector(".load-more")
 const gallery = document.querySelector(".gallery")
+loadMoreBtn.style.visibility = 'hidden'
+const addMore = 1;
 function createImg(images) {
     images.preventDefault()
     const markup = images
@@ -39,7 +41,9 @@ function getPhoto(name) {
             q: name,
         image_type: 'photo',
         orientation: 'horizontal',
-        safesearch: 'true'
+            safesearch: 'true',
+            per_page: 40,
+        page: addMore
     }
 })
     .then(response => {
@@ -49,16 +53,34 @@ function getPhoto(name) {
 }
 
 form.addEventListener("submit", photoName => {
-    photoname = input.value.trim();
+    photoname = input.value;
     getPhoto(photoName)
         .then(data => {
-            if (data.length < 1) {
-                Notifi.faillure('Sorry, there are no images matching your search query. Please try again.')
+            if (data.length = 0 ) {
+                Notify.faillure('Sorry, there are no images matching your search query. Please try again.')
                 gallery.innerHTML = '';
+                gallery.innerHTML = '';
+                return
             }
             else {
                 createImg(data);
                 gallery.innerHTML = ''
+                loadMoreBtn.style.visibility ='visible'
             }
     })
 }) 
+loadMoreBtn.addEventListener("click", photoName=> {
+    photoName = input.value;
+    getPhoto(photoName)
+        .then(data => {
+            if (data.length == totalHits) {
+            Notify.info("We're sorry, but you've reached the end of search results.")
+            }
+            else {
+                addMore++;
+                createImg(data);
+                gallery.innerHTML = ''
+            }
+    })
+
+} )
