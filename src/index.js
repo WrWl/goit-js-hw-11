@@ -6,7 +6,7 @@ const loadMoreBtn = document.querySelector(".load-more")
 const gallery = document.querySelector(".gallery")
 loadMoreBtn.style.visibility = 'hidden'
 let addMore = 1; 
-const a = ""
+
 // звернення до серверу
 function getPhoto(name) {
    return  axios.get(`https://pixabay.com/api/`, {
@@ -58,9 +58,9 @@ function createImg(images) {
     // подія, при якій створюються картинки
 form.addEventListener("submit", photoName => {
     photoName.preventDefault();
-    a = input.value;
+    const inputText = input.value;
     
-    getPhoto(a)
+    getPhoto(inputText)
         .then(res => {
             console.log(res.data.hits)
             if (res.data.hits === []) {
@@ -76,8 +76,8 @@ form.addEventListener("submit", photoName => {
 //подія при якій додаються наступні картинки
 loadMoreBtn.addEventListener("click", photoName => {
     photoName.preventDefault()
-     a = input.value
-    getPhoto(a)
+     const inputText = input.value
+    getPhoto(inputText)
         .then(res => {
             if (res.data.hits == res.data.totalHits) {
             Notify.info("We're sorry, but you've reached the end of search results.")
