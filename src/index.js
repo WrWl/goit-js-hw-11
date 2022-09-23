@@ -58,12 +58,13 @@ function createImg(images) {
     // подія, при якій створюються картинки
 form.addEventListener("submit", photoName => {
     photoName.preventDefault();
-     a = input.value
+    a = input.value
+    
     getPhoto(a)
         .then(res => {
             console.log(res.data.hits)
-            if (res.data.hits.length == 0) {
-                Notify.faillure('Sorry, there are no images matching your search query. Please try again.')
+            if (res.data.hits === []) {
+                Notify.failure('Sorry, there are no images matching your search query. Please try again.')
                 
             }
             else {
@@ -78,7 +79,7 @@ loadMoreBtn.addEventListener("click", photoName => {
     
     getPhoto(a)
         .then(res => {
-            if (res.data.hits == res.totalHits) {
+            if (res.data.hits == res.data.totalHits) {
             Notify.info("We're sorry, but you've reached the end of search results.")
             }
             else {
