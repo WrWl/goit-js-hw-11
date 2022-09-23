@@ -7,9 +7,7 @@ const gallery = document.querySelector(".gallery")
 loadMoreBtn.style.visibility = 'hidden'
 const addMore = 1;
 function createImg(images) {
-    images.preventDefault()
-    const markup = images
-        .map((img) => {
+    const markup = images.map((img) => {
             return `<div class="gallery">
         <div class="photo-card">
             <img src="${img.webformatURL}" alt="${tags}" loading="lazy" />
@@ -31,7 +29,7 @@ function createImg(images) {
     </div>`
         })
         .join("");
-    gallery.innerHTML=markup
+    gallery.innerHTML = markup;
 }
     
 function getPhoto(name) {
@@ -53,6 +51,7 @@ function getPhoto(name) {
 }
 
 form.addEventListener("submit", photoName => {
+    photoName.preventDefault()
     photoname = input.value;
     getPhoto(photoName)
         .then(data => {
