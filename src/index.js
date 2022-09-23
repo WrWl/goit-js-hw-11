@@ -53,7 +53,7 @@ function createImg(images) {
     </div>`
         })
         .join("");
-    gallery.innerHTML = markup;
+    gallery.insertAdjacentHTML('beforeend',markup)
 } 
     // подія, при якій створюються картинки
 form.addEventListener("submit", photoName => {
