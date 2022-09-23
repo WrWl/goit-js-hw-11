@@ -6,7 +6,7 @@ const loadMoreBtn = document.querySelector(".load-more")
 const gallery = document.querySelector(".gallery")
 loadMoreBtn.style.visibility = 'hidden'
 let addMore = 1; 
-const a
+const a = ""
 // звернення до серверу
 function getPhoto(name) {
    return  axios.get(`https://pixabay.com/api/`, {
