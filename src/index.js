@@ -1,4 +1,4 @@
-import Notiflix, { Notify } from 'notiflix';
+import Notiflix from 'notiflix';
 import axios from "axios";
 const form = document.querySelector('.search-form')
 const input = document.querySelector(".input")
@@ -10,19 +10,19 @@ function createImg(images) {
     const markup = images.map((img) => {
             return `<div class="gallery">
         <div class="photo-card">
-            <img src="${img.webformatURL}" alt="${tags}" loading="lazy" />
+            <img src="${img.webformatURL}" alt="${img.tags}" loading="lazy" />
             <div class="info">
                 <p class="info-item">
-                    <b>${likes}</b>
+                    <b>${img.likes}</b>
                 </p>
                 <p class="info-item">
-                    <b>${views}</b>
+                    <b>${img.views}</b>
                 </p>
                 <p class="info-item">
-                    <b>${comments}</b>
+                    <b>${img.comments}</b>
                 </p>
                 <p class="info-item">
-                    <b>${downloads}</b>
+                    <b>${img.downloads}</b>
                 </p>
             </div>
         </div>
@@ -51,7 +51,7 @@ function getPhoto(name) {
 }
 
 form.addEventListener("submit", photoName => {
-    photoName.preventDefault()
+    photoName.preventDefault();
     photoname = input.value;
     getPhoto(photoName)
         .then(data => {
@@ -68,7 +68,8 @@ form.addEventListener("submit", photoName => {
             }
     })
 }) 
-loadMoreBtn.addEventListener("click", photoName=> {
+loadMoreBtn.addEventListener("click", photoName => {
+    photoName.preventDefault()
     photoName = input.value;
     getPhoto(photoName)
         .then(data => {
